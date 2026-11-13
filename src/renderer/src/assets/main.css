@@ -1,1 +1,16 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-background: hsla(240 13% 39% / 1);
+
+  /* Navigations */
+  --color-nav-background: hsla(240 63% 82% / 0.24);
+  --color-nav-gradient: hsla(240 38% 31% / 1);
+  --color-nav-border: hsla(240 63% 82% / 0.24);
+  --color-nav-icon: hsla(0 0% 92% / 0.5);
+  --color-nav-icon-active: hsla(0 0% 88% / 0.9);
+  --color-nav-item: hsla(240 38% 31% / 1);
+
+  --shadow-nav-item-inner:
+    inset 0 2px 4px 0 rgba(255, 255, 255, 0.25), inset 0 -2px 5px 1px rgba(255, 255, 255, 0.3);
+}
