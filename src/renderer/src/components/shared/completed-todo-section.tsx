@@ -1,0 +1,38 @@
+import { getCompletedTodos } from '@renderer/stores/use-todo-store'
+
+import Empty from '../ui/empty'
+import TodoItem from '../ui/todo-item'
+
+function CompletedTodoSection() {
+  const todos = getCompletedTodos()
+
+  const renderTodoList = () => {
+    const hasTodos = Boolean(todos.length > 0)
+
+    if (hasTodos)
+      return (
+        <ul className="space-y-0.5">
+          {todos.map((item, index) => (
+            <li key={item.id}>
+              <TodoItem todo={item} index={index} totalItem={todos.length} />
+            </li>
+          ))}
+        </ul>
+      )
+
+    return <Empty message="No completed tasks yet" />
+  }
+
+  return (
+    <section className="bg-card p-3 rounded-xl flex flex-col gap-4">
+      <header className="flex items-center gap-4 justify-between">
+        <h2 className="text-lg italic tracking-tighter text-card-foreground trim-cap">Completed</h2>
+      </header>
+
+      {renderTodoList()}
+    </section>
+  )
+}
+
+export default CompletedTodoSection
+

@@ -72,7 +72,7 @@ function Navigation() {
               }}
               onClick={() => setActiveNavigation(item.label)}
               className={cn(
-                'rounded-full py-2.5 px-5 flex items-center justify-center text-nav-icon relative z-10 cursor-pointer transition-colors hover:bg-white/5',
+                'rounded-full py-2.5 px-5 flex items-center justify-center text-nav-icon relative z-10 cursor-pointer transition-colors hover:bg-white/10',
                 isActive && 'text-nav-icon-active hover:bg-transparent'
               )}
             >

@@ -199,7 +199,7 @@ function AddTodoForm({ handleOnClose }: { handleOnClose: () => void }) {
       <span
         ref={backdropRef}
         onClick={animateAndClose}
-        className="absolute w-full h-full bg-neutral-950/30 backdrop-blur-lg"
+        className="absolute w-full h-full bg-neutral-950/50 backdrop-blur-lg"
       />
     </div>
   )

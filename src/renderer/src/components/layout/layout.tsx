@@ -13,7 +13,7 @@ function Layout(props: Props) {
     <div className="bg-background w-full min-h-screen p-2">
       <Header />
 
-      <div className="flex flex-col gap-1.5 pb-12 pt-1.5">{children}</div>
+      <div className="flex flex-col gap-1.5 pb-24 pt-1.5">{children}</div>
 
       <Navigation />
       <AddTodoModal />

@@ -9,7 +9,7 @@
   --color-card-foreground: hsla(240 11% 55% / 1);
 
   /* Navigations */
-  --color-nav-background: hsla(240 63% 82% / 0.24);
+  --color-nav-background: hsla(240 63% 82% / 0.35);
   --color-nav-gradient: hsla(240 38% 31% / 1);
   --color-nav-border: hsla(240 63% 82% / 0.24);
   --color-nav-icon: hsla(0 0% 92% / 0.5);
@@ -45,6 +45,16 @@
   --color-input-placeholder: hsla(240 14% 88% / 0.5);
   --color-input-text: hsla(240 14% 88% / 1);
   --color-input-label: hsla(240 36% 88% / 0.8);
+
+  /* Todo item card */
+  --color-todo-card: hsla(240 100% 86% / 1);
+  --color-todo-card-foreground: hsla(240 90% 4% / 1);
+  --color-todo-card-foreground-checked: hsla(240 90% 4% / 0.5);
+
+  --shadow-todo-item-inner:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 3px 4px 0 rgba(235, 235, 235, 0.33),
+    inset 0 -6px 4px 0 rgba(235, 235, 235, 0.3);
 }
 
 @utility trim-cap {

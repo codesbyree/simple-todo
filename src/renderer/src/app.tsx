@@ -1,11 +1,14 @@
+import { useNavigationStore } from './stores/use-navigation-store'
+
 import Layout from './components/layout/layout'
 import ActiveTodoSection from './components/shared/active-todo-section'
-import { useNavigationStore } from './stores/use-navigation-store'
+import CompletedTodoSection from './components/shared/completed-todo-section'
 
 function TodoPage() {
   return (
     <>
       <ActiveTodoSection />
+      <CompletedTodoSection />
     </>
   )
 }

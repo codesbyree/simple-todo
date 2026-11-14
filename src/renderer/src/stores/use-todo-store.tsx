@@ -2,14 +2,14 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { v4 as uuid } from 'uuid'
 
-type TodoType = {
+export type TodoType = {
   id: string
   title: string
   checked: boolean
   createdAt: Date
 }
 
-type TodoStore = {
+export type TodoStore = {
   todos: TodoType[]
   addTodo: (todo: string) => void
   completeTodo: (id: string) => void

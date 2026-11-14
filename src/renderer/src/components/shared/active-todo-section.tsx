@@ -1,5 +1,7 @@
 import { getActiveTodos } from '@renderer/stores/use-todo-store'
+
 import Empty from '../ui/empty'
+import TodoItem from '../ui/todo-item'
 
 function ActiveTodoSection() {
   const todos = getActiveTodos()
@@ -9,9 +11,11 @@ function ActiveTodoSection() {
 
     if (hasTodos)
       return (
-        <ul>
-          {todos.map((item) => (
-            <li key={item.id}>{item.title}</li>
+        <ul className="space-y-0.5">
+          {todos.map((item, index) => (
+            <li key={item.id}>
+              <TodoItem todo={item} index={index} totalItem={todos.length} />
+            </li>
           ))}
         </ul>
       )
