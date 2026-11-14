@@ -45,8 +45,8 @@ function Navigation() {
         tl.to(
           activeIcon,
           {
-            keyframes: { rotate: [0, -12, 12, -8, 8, 0] },
-            duration: 0.4
+            keyframes: { scale: [1, 0.8, 1] },
+            duration: 0.2
           },
           '<'
         )
@@ -72,8 +72,8 @@ function Navigation() {
               }}
               onClick={() => setActiveNavigation(item.label)}
               className={cn(
-                'rounded-full py-2.5 px-5 flex items-center justify-center text-nav-icon relative z-10 cursor-pointer transition-colors',
-                isActive && 'text-nav-icon-active'
+                'rounded-full py-2.5 px-5 flex items-center justify-center text-nav-icon relative z-10 cursor-pointer transition-colors hover:bg-white/5',
+                isActive && 'text-nav-icon-active hover:bg-transparent'
               )}
             >
               {item.icon}
