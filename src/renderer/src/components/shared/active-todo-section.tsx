@@ -26,7 +26,7 @@ function ActiveTodoSection() {
   return (
     <section className="bg-card p-3 rounded-xl flex flex-col gap-4">
       <header className="flex items-center gap-4 justify-between">
-        <h2 className="text-lg italic tracking-tighter text-card-foreground trim-cap">Ongoing</h2>
+        <h2 className="text-lg italic tracking-tight text-card-foreground trim-cap">Ongoing</h2>
       </header>
 
       {renderTodoList()}

@@ -91,9 +91,9 @@ function PomodoroDurationSelection({ handleOnClose }: PomodoroDurationSelectionP
 
       <section
         ref={sheetRef}
-        className="relative z-20 w-full bg-form rounded-t-3xl p-5 pb-6 flex flex-col gap-5 shadow-2xl"
+        className="relative z-20 w-full bg-form rounded-t-3xl p-3 pt-5 pb-6 flex flex-col gap-6 shadow-2xl"
       >
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
           <h3 className="text-input-label tracking-tight text-base trim-cap">Working duration</h3>
 
           <div className="flex gap-1">
@@ -108,7 +108,7 @@ function PomodoroDurationSelection({ handleOnClose }: PomodoroDurationSelectionP
                     'py-2 px-1 text-base font-medium italic tracking-tight cursor-pointer transition-all duration-300 ease-in-out select-none outline-none focus:outline-none grow transform-gpu',
                     getButtonRadius(index, WORK_PRESETS.length, isActive),
                     isActive
-                      ? 'bg-pomodoro-button-selected text-pomodoro-button-selected-foreground grow-[1.5]'
+                      ? 'bg-pomodoro-button-selected text-pomodoro-button-selected-foreground grow-2'
                       : 'bg-pomodoro-button-unselected text-pomodoro-button-unselected-foreground hover:brightness-95'
                   )}
                 >
@@ -134,7 +134,7 @@ function PomodoroDurationSelection({ handleOnClose }: PomodoroDurationSelectionP
                     'py-2 px-1 text-base font-medium italic tracking-tight cursor-pointer transition-all duration-300 ease-in-out select-none outline-none focus:outline-none grow transform-gpu',
                     getButtonRadius(index, REST_PRESETS.length, isActive),
                     isActive
-                      ? 'bg-pomodoro-button-selected text-pomodoro-button-selected-foreground grow-[1.5]'
+                      ? 'bg-pomodoro-button-selected text-pomodoro-button-selected-foreground grow-2'
                       : 'bg-pomodoro-button-unselected text-pomodoro-button-unselected-foreground hover:brightness-95'
                   )}
                 >

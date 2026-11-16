@@ -230,7 +230,7 @@ function TodoItem({ todo, index, totalItem }: Props) {
       <div
         className={cn(
           'absolute inset-0 flex items-center justify-between px-4 text-white transition-colors duration-200',
-          isPastThreshold ? 'bg-rose-600' : 'bg-rose-950/70',
+          isPastThreshold ? 'bg-rose-400' : 'bg-rose-700/70',
           cardPos === 'single' && 'rounded-lg',
           cardPos === 'top' && 'rounded-tl-lg rounded-tr-lg',
           cardPos === 'bottom' && 'rounded-bl-lg rounded-br-lg'

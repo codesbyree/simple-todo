@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { usePomodoroStore } from '@renderer/stores/use-pomodoro-store'
 import PomodoroDurationSelection from './pomodoro-duration-selection'
+import { cn } from '@renderer/utils/cn'
 
 function PomodoroTimer() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
@@ -17,13 +18,29 @@ function PomodoroTimer() {
   const stop = usePomodoroStore((s) => s.stop)
 
   const textRef = useRef<HTMLHeadingElement>(null)
-  const headerText = mode === 'work' ? 'Working...' : 'Resting...'
+
+  const getHeaderText = () => {
+    if (status === 'paused') {
+      return 'Paused'
+    }
+    if (status === 'idle') {
+      return mode === 'work' ? 'Work' : 'Rest'
+    }
+    return mode === 'work' ? 'Working...' : 'Resting...'
+  }
+
+  const headerText = getHeaderText()
 
   useGSAP(
     () => {
       if (!textRef.current) return
       const chars = textRef.current.querySelectorAll('.wave-char')
       if (!chars.length) return
+
+      if (status !== 'running') {
+        gsap.set(chars, { y: 0 })
+        return
+      }
 
       const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 })
 
@@ -43,9 +60,10 @@ function PomodoroTimer() {
 
       return () => {
         tl.kill()
+        gsap.set(chars, { y: 0 })
       }
     },
-    { dependencies: [mode], scope: textRef }
+    { dependencies: [headerText, status], scope: textRef }
   )
 
   const minutes = Math.floor(timeLeft / 60)
@@ -60,10 +78,13 @@ function PomodoroTimer() {
         <header className="flex items-center gap-4 justify-between">
           <h2
             ref={textRef}
-            className="text-lg italic tracking-tighter text-card-foreground trim-cap select-none"
+            className="text-lg italic tracking-tight text-card-foreground trim-cap select-none"
           >
             {headerText.split('').map((char, index) => (
-              <span key={index} className="wave-char inline-block will-change-transform">
+              <span
+                key={`${headerText}-${index}`}
+                className="wave-char inline-block will-change-transform"
+              >
                 {char === ' ' ? '\u00A0' : char}
               </span>
             ))}
@@ -73,7 +94,7 @@ function PomodoroTimer() {
             <button
               type="button"
               onClick={() => setIsSettingsOpen(true)}
-              className="p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white/50 hover:text-white transition-colors cursor-pointer outline-none focus:outline-none flex items-center justify-center"
+              className="p-1.5 rounded-full bg-[#27C324] hover:bg-[#1e9b1c] text-pomodoro-button-foreground transition-colors cursor-pointer outline-none focus:outline-none flex items-center justify-center"
               aria-label="Pomodoro settings"
             >
               <CogIcon className="w-4.5 h-4.5" />
@@ -92,7 +113,10 @@ function PomodoroTimer() {
             <button
               type="button"
               onClick={isRunning ? pause : start}
-              className="w-full flex-1 rounded-full bg-todo-card flex items-center justify-center text-pomodoro-button-foreground cursor-pointer transition-all hover:brightness-95 active:scale-95 min-h-18 outline-none focus:outline-none"
+              className={cn(
+                'w-full flex-1 bg-todo-card flex items-center justify-center text-pomodoro-button-foreground cursor-pointer transition-all duration-300 hover:brightness-95 active:scale-95 min-h-18 outline-none focus:outline-none',
+                isRunning ? 'rounded-[100px]' : 'rounded-[10px]'
+              )}
               aria-label={isRunning ? 'Pause timer' : 'Start timer'}
             >
               {isRunning ? (

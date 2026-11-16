@@ -3,9 +3,12 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
+app.name = 'Simple Todo'
+
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    title: 'Simple Todo',
     width: 400,
     height: 600,
     resizable: false,
@@ -42,7 +45,7 @@ function createWindow(): void {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.simpletodo.app')
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.

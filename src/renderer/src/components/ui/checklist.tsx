@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Check } from 'lucide-react'
+import { CheckIcon } from 'lucide-react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
@@ -11,20 +11,13 @@ type ChecklistProps = {
 function Checklist({ checked = false, onToggle }: ChecklistProps) {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const checkRef = useRef<SVGSVGElement>(null)
-  const isFirstRender = useRef(true)
 
   useGSAP(
     () => {
-      if (isFirstRender.current) {
-        isFirstRender.current = false
-        if (checkRef.current) {
-          gsap.set(checkRef.current, {
-            scale: checked ? 1 : 0,
-            opacity: checked ? 1 : 0
-          })
-        }
-        return
-      }
+      gsap.set(checkRef.current, {
+        scale: checked ? 1 : 0,
+        opacity: checked ? 1 : 0
+      })
 
       if (checked) {
         gsap.fromTo(
@@ -55,12 +48,9 @@ function Checklist({ checked = false, onToggle }: ChecklistProps) {
       type="button"
       onClick={onToggle}
       aria-label={checked ? 'Mark as incomplete' : 'Mark as complete'}
-      className="w-7 h-7 shrink-0 rounded-full flex items-center justify-center bg-[#8e94d4] border-2 border-white/40 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] cursor-pointer select-none transition-transform hover:scale-105 active:scale-90"
+      className="w-7 h-7 shrink-0 rounded-full flex items-center justify-center bg-[#77FF74] border-2 border-white/40 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] cursor-pointer select-none transition-transform hover:scale-105 active:scale-90"
     >
-      <Check
-        ref={checkRef}
-        className="w-4 h-4 text-white stroke-[3.5]"
-      />
+      <CheckIcon ref={checkRef} className="w-4 h-4 text-[#009100] stroke-[3.5]" />
     </button>
   )
 }

@@ -43,10 +43,10 @@ function AddTodoButton({ handleOnOpen }: AddTodoButtonProps) {
       gsap.to(buttonRef.current, {
         autoAlpha: isInTodoPage ? 1 : 0,
         keyframes: { scale: isInTodoPage ? [0, 1.1, 1] : [1, 0] },
-        x: isInTodoPage ? 0 : '-100%',
+        x: isInTodoPage ? 0 : -30,
         filter: isInTodoPage ? 'blur(0px)' : 'blur(12px)',
         ease: 'power3.out',
-        duration: 0.2
+        duration: 0.3
       })
     },
     {

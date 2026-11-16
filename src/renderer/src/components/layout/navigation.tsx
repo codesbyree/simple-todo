@@ -7,8 +7,8 @@ import { NavigationStore, useNavigationStore } from '@renderer/stores/use-naviga
 import { cn } from '@renderer/utils/cn'
 
 const NAV_ITEMS: { label: NavigationStore['activeNavigation']; icon: ReactNode }[] = [
-  { label: 'todo', icon: <ListCheckIcon className="nav-icon" /> },
-  { label: 'pomodoro', icon: <TimerIcon className="nav-icon" /> }
+  { label: 'todo', icon: <ListCheckIcon /> },
+  { label: 'pomodoro', icon: <TimerIcon /> }
 ]
 
 function Navigation() {
@@ -30,7 +30,6 @@ function Navigation() {
       const activeItem = itemsRef.current[activeNavigation]
 
       if (!indicator || !activeItem) return
-      const activeIcon = itemsRef.current[activeNavigation]
 
       const tl = gsap.timeline()
       tl.to(indicator, {
@@ -39,17 +38,6 @@ function Navigation() {
         duration: 0.4,
         ease: 'power3.out'
       })
-
-      if (activeIcon) {
-        tl.to(
-          activeIcon,
-          {
-            keyframes: { scale: [1, 0.8, 1] },
-            duration: 0.2
-          },
-          '<'
-        )
-      }
     },
     { scope: containerRef, dependencies: [activeNavigation] }
   )
@@ -59,7 +47,7 @@ function Navigation() {
       ref={containerRef}
       className="flex justify-center items-center gap-4 fixed bottom-0 left-0 w-full z-100 bg-linear-to-b from-transparent via-nav-gradient/30 to-nav-gradient pt-2.5 pb-5"
     >
-      <ul className="flex items-center bg-nav-background rounded-full p-1 shadow-md backdrop-blur-lg relative border border-nav-border">
+      <ul className="flex items-center bg-nav-background rounded-full p-1 backdrop-blur-lg relative border border-nav-border">
         {NAV_ITEMS.map((item) => {
           const isActive = activeNavigation === item.label
 
@@ -71,8 +59,8 @@ function Navigation() {
               }}
               onClick={() => setActiveNavigation(item.label)}
               className={cn(
-                'rounded-full py-2.5 px-5 flex items-center justify-center text-nav-icon relative z-10 cursor-pointer transition-colors hover:bg-white/10',
-                isActive && 'text-nav-icon-active hover:bg-transparent'
+                'rounded-full py-2.5 px-5 flex items-center justify-center text-nav-icon relative z-10 cursor-pointer transition-colors hover:bg-white/30 hover:text-white/80',
+                isActive && 'text-nav-icon-active hover:bg-transparent hover:text-nav-icon-active'
               )}
             >
               {item.icon}
