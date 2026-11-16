@@ -57,6 +57,11 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
+  // Set the dock icon for macOS in development
+  if (process.platform === 'darwin') {
+    app.dock.setIcon(icon)
+  }
+
   createWindow()
 
   app.on('activate', function () {
