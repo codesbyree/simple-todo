@@ -74,7 +74,7 @@ function AddTodoButton({ handleOnOpen }: AddTodoButtonProps) {
     <button
       ref={buttonRef}
       onClick={handleOnOpen}
-      className="w-13.5 h-13.5 cursor-pointer border-none outline-none rounded-full grid place-items-center bg-(image:--gradient-custom-radial) hover:bg-(image:--gradient-custom-radial-hover) text-white/60 fixed bottom-5 right-15 z-102 backdrop-blur-lg shadow-fab-inner opacity-0"
+      className="w-13.5 h-13.5 cursor-pointer border-none outline-none rounded-full grid place-items-center bg-(image:--gradient-custom-radial) hover:bg-(image:--gradient-custom-radial-hover) text-white/60 fixed bottom-5 right-24 z-102 backdrop-blur-lg shadow-fab-inner opacity-0"
     >
       <PlusIcon />
     </button>

@@ -52,9 +52,17 @@
   --color-todo-card-foreground-checked: hsla(240 90% 4% / 0.5);
 
   --shadow-todo-item-inner:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
-    inset 0 3px 4px 0 rgba(235, 235, 235, 0.33),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3), inset 0 3px 4px 0 rgba(235, 235, 235, 0.33),
     inset 0 -6px 4px 0 rgba(235, 235, 235, 0.3);
+
+  /* Pomodoro buttons */
+  --color-pomodoro-button: hsla(240 100% 86% / 1);
+  --color-pomodoro-button-foreground: hsla(240 34% 41% / 1);
+
+  --color-pomodoro-button-unselected: hsla(240 100% 86% / 1);
+  --color-pomodoro-button-unselected-foreground: hsla(240 34% 41% / 1);
+  --color-pomodoro-button-selected: hsla(240 34% 41% / 1);
+  --color-pomodoro-button-selected-foreground: hsla(240 100% 86% / 1);
 }
 
 @utility trim-cap {
@@ -91,6 +99,15 @@
 
   body {
     font-family: var(--font-sans);
+  }
+
+  button {
+    outline: none;
+  }
+
+  button:focus,
+  button:focus-visible {
+    outline: none;
   }
 }
 

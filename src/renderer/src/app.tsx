@@ -3,6 +3,7 @@ import { useNavigationStore } from './stores/use-navigation-store'
 import Layout from './components/layout/layout'
 import ActiveTodoSection from './components/shared/active-todo-section'
 import CompletedTodoSection from './components/shared/completed-todo-section'
+import PomodoroTimer from './components/pomodoro/pomodoro-timer'
 
 function TodoPage() {
   return (
@@ -15,9 +16,9 @@ function TodoPage() {
 
 function PomodoroPage() {
   return (
-    <>
-      <p>Hello from Pomodoro</p>
-    </>
+    <div className="flex flex-col gap-4">
+      <PomodoroTimer />
+    </div>
   )
 }
 

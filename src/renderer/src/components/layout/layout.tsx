@@ -1,3 +1,4 @@
+import { usePomodoroTicker } from '@renderer/stores/use-pomodoro-store'
 import AddTodoModal from '../shared/add-todo-modal'
 import Header from './header'
 import Navigation from './navigation'
@@ -8,6 +9,7 @@ type Props = {
 
 function Layout(props: Props) {
   const { children } = props
+  usePomodoroTicker()
 
   return (
     <div className="bg-background w-full min-h-screen p-2">

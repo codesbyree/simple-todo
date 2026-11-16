@@ -1,5 +1,5 @@
 import { ReactNode, useRef } from 'react'
-import { ChartNoAxesColumnIcon, ListCheckIcon, TimerIcon } from 'lucide-react'
+import { ListCheckIcon, TimerIcon } from 'lucide-react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
@@ -8,8 +8,7 @@ import { cn } from '@renderer/utils/cn'
 
 const NAV_ITEMS: { label: NavigationStore['activeNavigation']; icon: ReactNode }[] = [
   { label: 'todo', icon: <ListCheckIcon className="nav-icon" /> },
-  { label: 'pomodoro', icon: <TimerIcon className="nav-icon" /> },
-  { label: 'analytics', icon: <ChartNoAxesColumnIcon className="nav-icon" /> }
+  { label: 'pomodoro', icon: <TimerIcon className="nav-icon" /> }
 ]
 
 function Navigation() {
