@@ -60,7 +60,7 @@ app.whenReady().then(() => {
 
   // Set the dock icon for macOS in development
   if (process.platform === 'darwin' && is.dev) {
-    app.dock.setIcon(icon)
+    if (app.dock) app.dock.setIcon(icon)
   }
 
   createWindow()
