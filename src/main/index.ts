@@ -18,7 +18,8 @@ function createWindow(): void {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      backgroundThrottling: false
     }
   })
 
@@ -58,7 +59,7 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   // Set the dock icon for macOS in development
-  if (process.platform === 'darwin') {
+  if (process.platform === 'darwin' && is.dev) {
     app.dock.setIcon(icon)
   }
 
