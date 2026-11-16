@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
 export type NavigationStore = {
-  activeNavigation: 'todo' | 'pomodoro' | 'analytics'
+  activeNavigation: 'todo' | 'pomodoro' | 'statistics'
   setActiveNavigation: (navigation: NavigationStore['activeNavigation']) => void
 }
 

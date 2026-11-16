@@ -74,7 +74,7 @@ function AddTodoButton({ handleOnOpen }: AddTodoButtonProps) {
     <button
       ref={buttonRef}
       onClick={handleOnOpen}
-      className="w-13.5 h-13.5 cursor-pointer border-none outline-none rounded-full grid place-items-center bg-(image:--gradient-custom-radial) hover:bg-(image:--gradient-custom-radial-hover) text-white/60 fixed bottom-5 right-18 z-102 backdrop-blur-lg shadow-fab-inner opacity-0"
+      className="w-13.5 h-13.5 cursor-pointer border border-white/30 outline-none rounded-full grid place-items-center bg-(image:--gradient-custom-radial) hover:bg-(image:--gradient-custom-radial-hover) text-nav-icon/70 fixed bottom-5 right-18 z-102 backdrop-blur-xl shadow-fab-inner opacity-0"
     >
       <PlusIcon />
     </button>
@@ -154,9 +154,9 @@ function AddTodoForm({ handleOnClose }: { handleOnClose: () => void }) {
     >
       <section
         ref={modalRef}
-        className="relative z-20 w-75 h-max p-3 bg-form rounded-xl flex flex-col gap-6"
+        className="relative z-20 w-75 h-max p-4 bg-card rounded-3xl flex flex-col gap-6"
       >
-        <header className="flex justify-between items-center text-form-header">
+        <header className="flex justify-between items-center text-card-foreground">
           <h2 className="text-lg font-semibold tracking-tight">Add Todo</h2>
 
           <button
@@ -170,9 +170,13 @@ function AddTodoForm({ handleOnClose }: { handleOnClose: () => void }) {
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-2">
-            <label htmlFor="todo-title" className="text-input-label tracking-tight text-base">
+            <label
+              htmlFor="todo-title"
+              className="text-secondary-foreground tracking-tight text-base"
+            >
               What to do
             </label>
+
             <input
               ref={inputRef}
               id="todo-title"
@@ -182,14 +186,14 @@ function AddTodoForm({ handleOnClose }: { handleOnClose: () => void }) {
               type="text"
               inputMode="text"
               autoFocus
-              className="rounded-tl-md tracking-tight rounded-tr-sm border border-input-ring focus:border-input-ring-focus outline-none! bg-input text-input-text placeholder:text-input-placeholder p-2.5 text-base"
+              className="rounded-tr-xl rounded-tl-xl tracking-tight border border-white/30 focus:border-white/60 outline-none! bg-secondary-foreground text-secondary placeholder:text-secondary/70 p-2.5 text-base"
             ></input>
           </div>
 
           <button
             type="submit"
             disabled={isSubmitButtonReady}
-            className="disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer rounded-md px-3 py-1 text-sm font-semibold tracking-tight text-input-button-foreground bg-input-button h-10 text-center w-full hover:bg-input-button-hover transition-colors"
+            className="disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer rounded-xl px-3 py-1 text-sm font-semibold tracking-tight text-primary-foreground bg-primary h-10 text-center w-full hover:brightness-105 transition-all"
           >
             Create todo
           </button>

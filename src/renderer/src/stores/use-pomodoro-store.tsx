@@ -6,8 +6,8 @@ import { soundService, SoundId } from '@renderer/services/sound-service'
 export type PomodoroMode = 'work' | 'rest'
 export type PomodoroStatus = 'idle' | 'running' | 'paused' | 'transitioning'
 
-export const WORK_PRESETS = [0.2, 30, 45, 60] as const
-export const REST_PRESETS = [0.1, 10, 15, 20] as const
+export const WORK_PRESETS = [25, 30, 45, 60] as const
+export const REST_PRESETS = [5, 10, 15, 20] as const
 
 function sendNotification(title: string, body: string): void {
   if (typeof Notification === 'undefined') return

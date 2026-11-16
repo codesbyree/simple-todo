@@ -4,65 +4,42 @@
 @theme {
   --font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
 
-  --color-background: hsla(118 40% 61% / 1);
-  --color-card: hsla(119 80% 61% / 1);
-  --color-card-foreground: hsla(120 100% 25% / 0.5);
+  --color-background: hsla(118 31% 49% / 1);
+  --color-card: hsla(119 67% 53% / 1);
+  --color-card-foreground: hsla(120 100% 25% / 1);
 
-  /* Navigations */
-  --color-nav-background: hsla(119 54% 96% / 0.3);
-  --color-nav-gradient: hsla(118 40% 61% / 1);
-  --color-nav-border: hsla(119 71% 75% / 0.24);
-  --color-nav-icon: hsla(128 100% 90% / 1);
-  --color-nav-icon-active: hsla(0 0% 100% / 0.9);
-  --color-nav-item: hsla(119 93% 34% / 0.9);
+  --color-primary: hsla(120 84% 25% / 1);
+  --color-primary-foreground: hsla(120 64% 68% / 1);
+  --color-secondary: hsla(119 100% 71% / 1);
+  --color-secondary-foreground: hsla(120 86% 28% / 1);
+  --color-tertiary: hsla(119 80 61 / 1);
+  --color-tertiary-foreground: hsla(120 100% 21% / 1);
 
-  --shadow-nav-item-inner:
-    inset 0 2px 4px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 5px 1px rgba(255, 255, 255, 0.2);
+  /* Bottom navigation */
+  --color-nav-background: hsla(131 31% 73% / 0.5);
+  --color-nav-gradient: hsla(118 33% 53% / 1);
+
+  --color-nav-icon: hsla(128 69% 94% / 1);
+  --color-nav-active-indicator: hsla(119 93% 34% / 0.8);
+
+  --shadow-nav-item:
+    0 1px 2px 0 rgba(0, 0, 0, 0.1), inset 0 1px 4px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -4px 5px 1px rgba(49, 205, 46, 1);
+
+  /* FAB */
   --gradient-custom-radial: radial-gradient(
-    circle at center,
-    rgba(159, 242, 173, 0.5) 60%,
-    rgba(255, 255, 255, 0.7) 100%
+    circle at bottom,
+    rgba(139, 222, 153, 0.6) 85%,
+    rgba(255, 255, 255, 1) 100%
   );
+
   --gradient-custom-radial-hover: radial-gradient(
-    circle at center,
-    rgba(159, 242, 173, 0.7) 60%,
-    rgba(255, 255, 255, 0.9) 100%
+    circle at top,
+    rgba(139, 222, 153, 0.9) 90%,
+    rgba(255, 255, 255, 1) 100%
   );
-  --shadow-fab-inner: inset 0 -2px 5px 1 rgba(255, 255, 255, 0.25);
 
-  --color-header-bg: hsla(120 100% 25% / 1);
-  --color-header-foreground: hsla(0 0% 100% / 1);
-
-  /* Form */
-  --color-form: hsla(119 83% 37% / 1);
-  --color-form-header: hsla(120 84% 25% / 1);
-  --color-input: hsla(120 66% 34% / 1);
-  --color-input-ring: hsla(120 66% 34% / 1);
-  --color-input-button: hsla(120 84% 25% / 1);
-  --color-input-button-foreground: hsla(120 64% 68% /1);
-
-  --color-input-ring-focus: hsla(119 63% 49% / 1);
-  --color-input-button-hover: hsla(120 100% 21% / 1);
-  --color-input-placeholder: hsla(120 70% 74% / 0.5);
-  --color-input-text: hsla(120 70% 74% / 1);
-  --color-input-label: hsla(120 100% 25% / 1);
-
-  /* Todo item card */
-  --color-todo-card: hsla(119 75% 41% / 1);
-  --color-todo-card-foreground: hsla(120 52% 25% / 1);
-  --color-todo-card-foreground-checked: hsla(120 52% 25% / 0.4);
-
-  --shadow-todo-item-inner:
-    inset 0 0 0 1px rgba(0, 155, 0, 0.3), inset 0 -6px 4px 0 rgba(0, 155, 0, 0.3);
-
-  /* Pomodoro buttons */
-  --color-pomodoro-button: hsla(119 67% 53% / 1);
-  --color-pomodoro-button-foreground: hsla(120 100% 25% / 1);
-
-  --color-pomodoro-button-unselected: hsla(120 86% 28% / 1);
-  --color-pomodoro-button-unselected-foreground: hsla(119 100% 71% / 1);
-  --color-pomodoro-button-selected: hsla(119 100% 71% / 1);
-  --color-pomodoro-button-selected-foreground: hsla(120 86% 28% / 1);
+  --shadow-fab-inner: inset 0 -4px 5px 1px rgba(255, 255, 255, 0.3);
 }
 
 @utility trim-cap {

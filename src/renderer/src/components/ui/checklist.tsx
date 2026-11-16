@@ -48,9 +48,9 @@ function Checklist({ checked = false, onToggle }: ChecklistProps) {
       type="button"
       onClick={onToggle}
       aria-label={checked ? 'Mark as incomplete' : 'Mark as complete'}
-      className="w-7 h-7 shrink-0 rounded-full flex items-center justify-center bg-[#77FF74] border-2 border-white/40 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] cursor-pointer select-none transition-transform hover:scale-105 active:scale-90"
+      className="w-7 h-7 shrink-0 rounded-full flex items-center justify-center bg-tertiary text-tertiary-foreground border border-[#5AD75A] cursor-pointer select-none transition-transform hover:scale-105 active:scale-90"
     >
-      <CheckIcon ref={checkRef} className="w-4 h-4 text-[#009100] stroke-[3.5]" />
+      <CheckIcon ref={checkRef} className="w-4 h-4" />
     </button>
   )
 }

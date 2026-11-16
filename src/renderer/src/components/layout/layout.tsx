@@ -12,10 +12,10 @@ function Layout(props: Props) {
   usePomodoroTicker()
 
   return (
-    <div className="bg-background w-full min-h-screen p-2">
+    <div className="bg-background w-full min-h-screen p-3">
       <Header />
 
-      <div className="flex flex-col gap-1.5 pb-24 pt-1.5">{children}</div>
+      <div className="flex flex-col gap-2 pb-24 pt-2">{children}</div>
 
       <Navigation />
       <AddTodoModal />

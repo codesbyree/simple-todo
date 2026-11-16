@@ -2,6 +2,7 @@ import { getCompletedTodos } from '@renderer/stores/use-todo-store'
 
 import Empty from '../ui/empty'
 import TodoItem from '../ui/todo-item'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 function CompletedTodoSection() {
   const todos = getCompletedTodos()
@@ -24,13 +25,13 @@ function CompletedTodoSection() {
   }
 
   return (
-    <section className="bg-card p-3 rounded-xl flex flex-col gap-4">
-      <header className="flex items-center gap-4 justify-between">
-        <h2 className="text-lg italic tracking-tight text-card-foreground trim-cap">Completed</h2>
-      </header>
+    <Card>
+      <CardHeader>
+        <CardTitle> Completed tasks</CardTitle>
+      </CardHeader>
 
-      {renderTodoList()}
-    </section>
+      <CardContent>{renderTodoList()}</CardContent>
+    </Card>
   )
 }
 

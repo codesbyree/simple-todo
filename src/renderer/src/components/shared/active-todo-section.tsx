@@ -2,6 +2,7 @@ import { getActiveTodos } from '@renderer/stores/use-todo-store'
 
 import Empty from '../ui/empty'
 import TodoItem from '../ui/todo-item'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 
 function ActiveTodoSection() {
   const todos = getActiveTodos()
@@ -24,13 +25,13 @@ function ActiveTodoSection() {
   }
 
   return (
-    <section className="bg-card p-3 rounded-xl flex flex-col gap-4">
-      <header className="flex items-center gap-4 justify-between">
-        <h2 className="text-lg italic tracking-tight text-card-foreground trim-cap">Ongoing</h2>
-      </header>
+    <Card>
+      <CardHeader>
+        <CardTitle>Ongoing tasks</CardTitle>
+      </CardHeader>
 
-      {renderTodoList()}
-    </section>
+      <CardContent>{renderTodoList()}</CardContent>
+    </Card>
   )
 }
 

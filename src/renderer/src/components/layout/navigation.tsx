@@ -1,5 +1,6 @@
 import { ReactNode, useRef } from 'react'
 import { ListCheckIcon, TimerIcon } from 'lucide-react'
+
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
@@ -9,6 +10,7 @@ import { cn } from '@renderer/utils/cn'
 const NAV_ITEMS: { label: NavigationStore['activeNavigation']; icon: ReactNode }[] = [
   { label: 'todo', icon: <ListCheckIcon /> },
   { label: 'pomodoro', icon: <TimerIcon /> }
+  // { label: 'statistics', icon: <TrendingUpIcon /> }
 ]
 
 function Navigation() {
@@ -21,7 +23,7 @@ function Navigation() {
   const itemsRef = useRef<Record<NavigationStore['activeNavigation'], HTMLLIElement | null>>({
     todo: null,
     pomodoro: null,
-    analytics: null
+    statistics: null
   })
 
   useGSAP(
@@ -47,7 +49,7 @@ function Navigation() {
       ref={containerRef}
       className="flex justify-center items-center gap-4 fixed bottom-0 left-0 w-full z-100 bg-linear-to-b from-transparent via-nav-gradient/30 to-nav-gradient pt-2.5 pb-5"
     >
-      <ul className="flex items-center bg-nav-background rounded-full p-1 backdrop-blur-lg relative border border-nav-border">
+      <ul className="flex items-center bg-nav-background rounded-full p-1 backdrop-blur-xl relative border border-white/25">
         {NAV_ITEMS.map((item) => {
           const isActive = activeNavigation === item.label
 
@@ -59,8 +61,8 @@ function Navigation() {
               }}
               onClick={() => setActiveNavigation(item.label)}
               className={cn(
-                'rounded-full py-2.5 px-5 flex items-center justify-center text-nav-icon relative z-10 cursor-pointer transition-colors hover:bg-white/30 hover:text-white/80',
-                isActive && 'text-nav-icon-active hover:bg-transparent hover:text-nav-icon-active'
+                'rounded-full py-2.5 px-5 flex items-center justify-center text-nav-icon/60 relative z-10 cursor-pointer transition-colors hover:bg-white/30',
+                isActive && 'hover:bg-transparent text-nav-icon'
               )}
             >
               {item.icon}
@@ -71,7 +73,7 @@ function Navigation() {
         <span
           ref={navActiveIndicatorRef}
           className={cn(
-            'bg-nav-item rounded-full h-11 w-16 absolute top-1 left-1 shadow-nav-item-inner'
+            'bg-nav-active-indicator rounded-full h-11 w-16 absolute top-1 left-1 shadow-nav-item border border-white/30'
           )}
         />
       </ul>

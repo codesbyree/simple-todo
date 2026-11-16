@@ -220,20 +220,20 @@ function TodoItem({ todo, index, totalItem }: Props) {
     <div
       ref={containerRef}
       className={cn(
-        'relative overflow-hidden select-none',
-        cardPos === 'single' && 'rounded-lg',
-        cardPos === 'top' && 'rounded-tl-lg rounded-tr-lg',
-        cardPos === 'bottom' && 'rounded-bl-lg rounded-br-lg'
+        'relative overflow-hidden select-none rounded-sm',
+        cardPos === 'single' && 'rounded-xl',
+        cardPos === 'top' && 'rounded-tl-xl rounded-tr-xl',
+        cardPos === 'bottom' && 'rounded-bl-xl rounded-br-xl'
       )}
     >
       {/* Background delete indicators (revealed on drag left or right) */}
       <div
         className={cn(
-          'absolute inset-0 flex items-center justify-between px-4 text-white transition-colors duration-200',
+          'absolute inset-0 flex items-center rounded-sm justify-between px-4 text-white transition-colors duration-200',
           isPastThreshold ? 'bg-rose-400' : 'bg-rose-700/70',
-          cardPos === 'single' && 'rounded-lg',
-          cardPos === 'top' && 'rounded-tl-lg rounded-tr-lg',
-          cardPos === 'bottom' && 'rounded-bl-lg rounded-br-lg'
+          cardPos === 'single' && 'rounded-xl',
+          cardPos === 'top' && 'rounded-tl-xl rounded-tr-xl',
+          cardPos === 'bottom' && 'rounded-bl-xl rounded-br-xl'
         )}
       >
         <div
@@ -270,16 +270,16 @@ function TodoItem({ todo, index, totalItem }: Props) {
         ref={cardRef}
         onPointerDown={handlePointerDown}
         className={cn(
-          'relative z-10 min-h-12.5 p-3 bg-todo-card shadow-todo-item-inner flex items-center justify-between gap-3 cursor-grab active:cursor-grabbing hover:brightness-95 transition-[filter,background-color] duration-150 touch-pan-y',
-          cardPos === 'single' && 'rounded-lg',
-          cardPos === 'top' && 'rounded-tl-lg rounded-tr-lg',
-          cardPos === 'bottom' && 'rounded-bl-lg rounded-br-lg'
+          'relative border border-white/30 z-10 min-h-12.5 p-3 bg-secondary rounded-sm flex items-center justify-between gap-3 cursor-grab active:cursor-grabbing hover:brightness-95 transition-[filter,background-color] duration-150 touch-pan-y',
+          cardPos === 'single' && 'rounded-xl',
+          cardPos === 'top' && 'rounded-tl-xl rounded-tr-xl',
+          cardPos === 'bottom' && 'rounded-bl-xl rounded-br-xl'
         )}
       >
         <h4
           className={cn(
-            'text-todo-card-foreground text-base tracking-tight leading-5 line-clamp-3 select-none transition-all duration-200',
-            isChecked && 'line-through text-todo-card-foreground-checked italic'
+            'text-secondary-foreground text-base tracking-tight leading-5 line-clamp-3 select-none transition-all duration-200 pr-1',
+            isChecked && 'line-through italic'
           )}
         >
           {todo.title}

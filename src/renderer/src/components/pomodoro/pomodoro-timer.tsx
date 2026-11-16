@@ -1,13 +1,26 @@
 import { useRef, useState } from 'react'
-import { CircleStop, CogIcon, Pause, Play, RotateCcw } from 'lucide-react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { usePomodoroStore } from '@renderer/stores/use-pomodoro-store'
-import PomodoroDurationSelection from './pomodoro-duration-selection'
+import {
+  CircleStop,
+  EighthNoteIcon,
+  PauseIcon,
+  PlayIcon,
+  RotateCcwIcon,
+  Settings2Icon
+} from 'lucide-react'
 import { cn } from '@renderer/utils/cn'
 
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+
+import { usePomodoroStore } from '@renderer/stores/use-pomodoro-store'
+
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import PomodoroDurationSelection from './pomodoro-duration-selection'
+import PomodoroSoundSelection from './pomodoro-sound-selection'
+
 function PomodoroTimer() {
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isDurationOpen, setIsDurationOpen] = useState(false)
+  const [isSoundOpen, setIsSoundOpen] = useState(false)
   const mode = usePomodoroStore((s) => s.mode)
   const status = usePomodoroStore((s) => s.status)
   const timeLeft = usePomodoroStore((s) => s.timeLeft)
@@ -74,84 +87,94 @@ function PomodoroTimer() {
 
   return (
     <>
-      <section className="bg-card p-3 rounded-2xl flex flex-col gap-4">
-        <header className="flex items-center gap-4 justify-between">
-          <h2
-            ref={textRef}
-            className="text-lg italic tracking-tight text-card-foreground trim-cap select-none"
-          >
+      <Card>
+        <CardHeader>
+          <CardTitle ref={textRef}>
             {headerText.split('').map((char, index) => (
               <span
                 key={`${headerText}-${index}`}
-                className="wave-char inline-block will-change-transform"
+                className="wave-char trim-cap inline-block will-change-transform"
               >
                 {char === ' ' ? '\u00A0' : char}
               </span>
             ))}
-          </h2>
+          </CardTitle>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <button
               type="button"
-              onClick={() => setIsSettingsOpen(true)}
-              className="p-1.5 rounded-full bg-[#27C324] hover:bg-[#1e9b1c] text-pomodoro-button-foreground transition-colors cursor-pointer outline-none focus:outline-none flex items-center justify-center"
-              aria-label="Pomodoro settings"
+              onClick={() => setIsSoundOpen(true)}
+              className="p-1.5 rounded-full bg-secondary hover:brightness-105 text-secondary-foreground active:brightness-95 transition-all cursor-pointer outline-none focus:outline-none flex items-center justify-center"
+              aria-label="Pomodoro sound effects"
             >
-              <CogIcon className="w-4.5 h-4.5" />
+              <EighthNoteIcon className="w-4 h-4" />
             </button>
-          </div>
-        </header>
 
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-todo-card rounded-[10px] flex items-center justify-center p-3 min-h-36 select-none">
-            <span className="text-6xl font-extrabold tracking-tight text-pomodoro-button-foreground tabular-nums">
-              {formattedTime}
-            </span>
-          </div>
-
-          <div className="flex flex-col gap-2">
             <button
               type="button"
-              onClick={isRunning ? pause : start}
-              className={cn(
-                'w-full flex-1 bg-todo-card flex items-center justify-center text-pomodoro-button-foreground cursor-pointer transition-all duration-300 hover:brightness-95 active:scale-95 min-h-18 outline-none focus:outline-none',
-                isRunning ? 'rounded-[100px]' : 'rounded-[10px]'
-              )}
-              aria-label={isRunning ? 'Pause timer' : 'Start timer'}
+              onClick={() => setIsDurationOpen(true)}
+              className="p-1.5 rounded-full bg-secondary hover:brightness-105 text-secondary-foreground active:brightness-95 transition-all cursor-pointer outline-none focus:outline-none flex items-center justify-center"
+              aria-label="Pomodoro duration settings"
             >
-              {isRunning ? (
-                <Pause className="w-7 h-7 fill-current stroke-none" />
-              ) : (
-                <Play className="w-7 h-7 fill-current stroke-none translate-x-0.5" />
-              )}
+              <Settings2Icon className="w-4 h-4" />
             </button>
+          </div>
+        </CardHeader>
 
-            <div className="grid grid-cols-2 gap-1 h-11.5">
+        <CardContent>
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-secondary rounded-xl flex items-center justify-center p-3 min-h-36 select-none">
+              <span className="text-5xl font-extrabold tracking-tight text-secondary-foreground tabular-nums">
+                {formattedTime}
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-2">
               <button
                 type="button"
-                onClick={reset}
-                className="rounded-4xl rounded-tr-sm rounded-br-sm bg-todo-card flex items-center justify-center text-pomodoro-button-foreground cursor-pointer transition-all hover:brightness-95 active:scale-95 outline-none focus:outline-none"
-                aria-label="Reset timer"
+                onClick={isRunning ? pause : start}
+                className={cn(
+                  'w-full flex-1 bg-secondary flex items-center justify-center text-secondary-foreground cursor-pointer transition-all duration-300 hover:brightness-95 active:scale-95 min-h-18 outline-none focus:outline-none',
+                  isRunning ? 'rounded-[100px]' : 'rounded-xl'
+                )}
+                aria-label={isRunning ? 'Pause timer' : 'Start timer'}
               >
-                <RotateCcw className="w-5 h-5 stroke-[2.5]" />
+                {isRunning ? (
+                  <PauseIcon className="w-9 h-9 fill-current stroke-none" />
+                ) : (
+                  <PlayIcon className="w-9 h-9 fill-current stroke-none translate-x-0.5" />
+                )}
               </button>
 
-              <button
-                type="button"
-                onClick={stop}
-                className="rounded-4xl rounded-tl-sm rounded-bl-sm bg-todo-card flex items-center justify-center text-pomodoro-button-foreground cursor-pointer transition-all hover:brightness-95 active:scale-95 outline-none focus:outline-none"
-                aria-label="Stop timer"
-              >
-                <CircleStop className="w-5 h-5 stroke-[2.5]" />
-              </button>
+              <div className="grid grid-cols-2 gap-1 h-11.5">
+                <button
+                  type="button"
+                  onClick={reset}
+                  className="rounded-4xl rounded-tr-sm rounded-br-sm bg-secondary flex items-center justify-center text-secondary-foreground cursor-pointer transition-all hover:brightness-95 active:scale-95 outline-none focus:outline-none"
+                  aria-label="Reset timer"
+                >
+                  <RotateCcwIcon className="w-5 h-5 stroke-[2.5]" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={stop}
+                  className="rounded-4xl rounded-tl-sm rounded-bl-sm bg-secondary flex items-center justify-center text-secondary-foreground cursor-pointer transition-all hover:brightness-95 active:scale-95 outline-none focus:outline-none"
+                  aria-label="Stop timer"
+                >
+                  <CircleStop className="w-5 h-5 stroke-[2.5]" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </CardContent>
+      </Card>
 
-      {isSettingsOpen && (
-        <PomodoroDurationSelection handleOnClose={() => setIsSettingsOpen(false)} />
+      {isDurationOpen && (
+        <PomodoroDurationSelection handleOnClose={() => setIsDurationOpen(false)} />
       )}
+
+      {isSoundOpen && <PomodoroSoundSelection handleOnClose={() => setIsSoundOpen(false)} />}
     </>
   )
 }
