@@ -3,7 +3,7 @@ import { ComponentPropsWithRef } from 'react'
 
 interface Props extends ComponentPropsWithRef<'button'> {
   variant?: 'primary' | 'secondary' | 'accent' | 'ghost'
-  size?: 'default' | 'icon'
+  size?: 'default' | 'icon' | 'icon-lg'
   position?: 'first' | 'middle' | 'last' | 'top' | 'bottom' | 'single' | 'single-full'
 }
 
@@ -26,7 +26,8 @@ const buttonColorByVariant: Record<NonNullable<Props['variant']>, string> = {
 
 const buttonSizeByVariant: Record<NonNullable<Props['size']>, string> = {
   default: 'h-10 px-3 py-1',
-  icon: 'w-6 h-6 p-0 grid place-items-center'
+  icon: 'w-6 h-6 p-0 grid place-items-center',
+  'icon-lg': 'w-8 h-8 grid place-items-center'
 }
 
 function Button(props: Props) {

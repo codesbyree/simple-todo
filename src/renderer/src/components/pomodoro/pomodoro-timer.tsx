@@ -169,7 +169,7 @@ function PomodoroTimer() {
           </div>
         </CardContent>
 
-        <CardFooter className="flex items-center justify-end">
+        <CardFooter className="flex items-center justify-end empty:hidden">
           {mode === 'rest' && (
             <Button
               variant="accent"

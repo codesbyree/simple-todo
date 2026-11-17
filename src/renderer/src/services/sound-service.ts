@@ -28,6 +28,8 @@ export const REST_SOUND_OPTIONS: SoundOption[] = [
   { id: 'vibraphone', name: 'Vibraphone', description: 'Jazz tremolo shimmer' }
 ]
 
+import { ambientSoundEngine } from './ambient-sound-service'
+
 class SoundService {
   private ctx: AudioContext | null = null
   private isMuted: boolean = false
@@ -469,6 +471,8 @@ class SoundService {
       clearTimeout(this.timerEndLoopTimeout)
       this.timerEndLoopTimeout = null
     }
+    // Restore ambient music volume if chime sequence is interrupted early
+    ambientSoundEngine.unduck(350)
   }
 
   public playWorkEndSequence(
@@ -505,6 +509,10 @@ class SoundService {
     }
 
     this.stopTimerEndSequence()
+
+    // Duck (lower) ambient music so timer end sound effects are heard clearly
+    ambientSoundEngine.duck(0.15, 250)
+
     let currentIteration = 0
 
     const playNext = () => {
@@ -515,10 +523,13 @@ class SoundService {
         this.timerEndLoopTimeout = setTimeout(playNext, intervalMs)
       } else {
         this.timerEndLoopTimeout = null
-        if (onComplete) {
-          // Give final chime a moment to ring before invoking callback
-          setTimeout(onComplete, 1200)
-        }
+        // Restore ambient music volume after final chime rings out
+        setTimeout(() => {
+          ambientSoundEngine.unduck(450)
+          if (onComplete) {
+            onComplete()
+          }
+        }, 1200)
       }
     }
 
