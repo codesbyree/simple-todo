@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { Volume2, XIcon } from 'lucide-react'
+import { Volume2Icon, XIcon } from 'lucide-react'
+import { cn } from '@renderer/utils/cn'
+
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+
 import { usePomodoroStore } from '@renderer/stores/use-pomodoro-store'
 import {
   WORK_SOUND_OPTIONS,
@@ -9,7 +12,8 @@ import {
   soundService,
   SoundId
 } from '@renderer/services/sound-service'
-import { cn } from '@renderer/utils/cn'
+
+import Button from '../ui/button'
 
 type PomodoroSoundSelectionProps = {
   handleOnClose: () => void
@@ -94,13 +98,9 @@ function PomodoroSoundSelection({ handleOnClose }: PomodoroSoundSelectionProps) 
         <header className="flex justify-between items-center text-card-foreground">
           <h2 className="text-lg font-semibold tracking-tight">Sound Effects</h2>
 
-          <button
-            type="button"
-            onClick={animateAndClose}
-            className="cursor-pointer border-none focus:outline-0"
-          >
+          <Button onClick={animateAndClose} size="icon" variant="ghost">
             <XIcon className="w-6 h-6" />
-          </button>
+          </Button>
         </header>
 
         <div className="flex flex-col gap-4">
@@ -113,26 +113,23 @@ function PomodoroSoundSelection({ handleOnClose }: PomodoroSoundSelectionProps) 
               <div className="grid grid-cols-2 gap-1">
                 {WORK_SOUND_OPTIONS.map((sound) => {
                   const isActive = selectedWorkSound === sound.id
+
                   return (
-                    <button
+                    <Button
                       key={sound.id}
-                      type="button"
+                      position={isActive ? 'single-full' : 'single'}
+                      variant={isActive ? 'secondary' : 'primary'}
                       onClick={() => {
                         setSelectedWorkSound(sound.id)
                         soundService.playSound(sound.id)
                       }}
-                      className={cn(
-                        'py-2 px-2.5 rounded-xl text-sm font-medium italic tracking-tight cursor-pointer transition-all duration-300 ease-in-out select-none outline-none focus:outline-none flex items-center justify-between transform-gpu',
-                        isActive
-                          ? 'bg-secondary text-secondary-foreground rounded-[100px]'
-                          : 'bg-primary text-primary-foreground hover:brightness-95'
-                      )}
+                      className="justify-between"
                     >
                       <span className="truncate pr-2">{sound.name}</span>
-                      <Volume2
+                      <Volume2Icon
                         className={cn('w-3.5 h-3.5 shrink-0 opacity-50', isActive && 'opacity-100')}
                       />
-                    </button>
+                    </Button>
                   )
                 })}
               </div>
@@ -144,39 +141,30 @@ function PomodoroSoundSelection({ handleOnClose }: PomodoroSoundSelectionProps) 
               <div className="grid grid-cols-2 gap-1">
                 {REST_SOUND_OPTIONS.map((sound) => {
                   const isActive = selectedRestSound === sound.id
+
                   return (
-                    <button
+                    <Button
                       key={sound.id}
-                      type="button"
+                      position={isActive ? 'single-full' : 'single'}
+                      variant={isActive ? 'secondary' : 'primary'}
                       onClick={() => {
                         setSelectedRestSound(sound.id)
                         soundService.playSound(sound.id)
                       }}
-                      className={cn(
-                        'py-2 px-2.5 rounded-xl text-sm font-medium italic tracking-tight cursor-pointer transition-all duration-300 ease-in-out select-none outline-none focus:outline-none flex items-center justify-between transform-gpu',
-                        isActive
-                          ? 'bg-secondary text-secondary-foreground rounded-[100px]'
-                          : 'bg-primary text-primary-foreground hover:brightness-95'
-                      )}
+                      className="justify-between"
                     >
                       <span className="truncate pr-2">{sound.name}</span>
-                      <Volume2
+                      <Volume2Icon
                         className={cn('w-3.5 h-3.5 shrink-0 opacity-50', isActive && 'opacity-100')}
                       />
-                    </button>
+                    </Button>
                   )
                 })}
               </div>
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={handleSave}
-            className="disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer rounded-xl px-3 py-1 text-sm font-semibold tracking-tight text-primary-foreground bg-primary h-10 text-center w-full hover:brightness-105 transition-all"
-          >
-            Save sound settings
-          </button>
+          <Button onClick={handleSave}>Save sound settings</Button>
         </div>
       </section>
     </div>

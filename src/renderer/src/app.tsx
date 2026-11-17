@@ -1,9 +1,10 @@
 import { useNavigationStore } from './stores/use-navigation-store'
 
 import Layout from './components/layout/layout'
-import ActiveTodoSection from './components/shared/active-todo-section'
-import CompletedTodoSection from './components/shared/completed-todo-section'
+import ActiveTodoSection from './components/todo/active-todo-section'
+import CompletedTodoSection from './components/todo/completed-todo-section'
 import PomodoroTimer from './components/pomodoro/pomodoro-timer'
+import PomodoroAmbientSounds from './components/pomodoro/pomodoro-ambient-sounds'
 
 function TodoPage() {
   return (
@@ -16,9 +17,10 @@ function TodoPage() {
 
 function PomodoroPage() {
   return (
-    <div className="flex flex-col gap-4">
+    <>
       <PomodoroTimer />
-    </div>
+      <PomodoroAmbientSounds />
+    </>
   )
 }
 
@@ -38,7 +40,7 @@ function AppRoutes() {
       return <TodoPage />
     case 'pomodoro':
       return <PomodoroPage />
-    case 'analytics':
+    case 'statistics':
       return <AnalyticsPage />
     default:
       return <TodoPage />

@@ -7,6 +7,8 @@ import { useGSAP } from '@gsap/react'
 import { useTodoStore } from '@renderer/stores/use-todo-store'
 import { useNavigationStore } from '@renderer/stores/use-navigation-store'
 
+import Button from '../ui/button'
+
 function AddTodoModal() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
 
@@ -71,13 +73,13 @@ function AddTodoButton({ handleOnOpen }: AddTodoButtonProps) {
   }, [])
 
   return (
-    <button
+    <Button
       ref={buttonRef}
       onClick={handleOnOpen}
-      className="w-13.5 h-13.5 cursor-pointer border border-white/30 outline-none rounded-full grid place-items-center bg-(image:--gradient-custom-radial) hover:bg-(image:--gradient-custom-radial-hover) text-nav-icon/70 fixed bottom-5 right-18 z-102 backdrop-blur-xl shadow-fab-inner opacity-0"
+      className="w-13.5 h-13.5 transition-none cursor-pointer border border-white/30 outline-none rounded-full grid place-items-center bg-(image:--gradient-custom-radial) hover:bg-(image:--gradient-custom-radial-hover) text-nav-icon/70 fixed bottom-5 right-18 z-102 backdrop-blur-xl shadow-fab-inner opacity-0"
     >
       <PlusIcon />
-    </button>
+    </Button>
   )
 }
 
@@ -159,13 +161,9 @@ function AddTodoForm({ handleOnClose }: { handleOnClose: () => void }) {
         <header className="flex justify-between items-center text-card-foreground">
           <h2 className="text-lg font-semibold tracking-tight">Add Todo</h2>
 
-          <button
-            type="button"
-            onClick={animateAndClose}
-            className="cursor-pointer border-none focus:outline-0"
-          >
+          <Button onClick={animateAndClose} size="icon" variant="ghost">
             <XIcon className="w-6 h-6" />
-          </button>
+          </Button>
         </header>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
@@ -190,13 +188,9 @@ function AddTodoForm({ handleOnClose }: { handleOnClose: () => void }) {
             ></input>
           </div>
 
-          <button
-            type="submit"
-            disabled={isSubmitButtonReady}
-            className="disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer rounded-xl px-3 py-1 text-sm font-semibold tracking-tight text-primary-foreground bg-primary h-10 text-center w-full hover:brightness-105 transition-all"
-          >
+          <Button type="submit" disabled={isSubmitButtonReady}>
             Create todo
-          </button>
+          </Button>
         </form>
       </section>
 

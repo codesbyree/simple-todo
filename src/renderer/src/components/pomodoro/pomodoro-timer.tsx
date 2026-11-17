@@ -5,18 +5,19 @@ import {
   PauseIcon,
   PlayIcon,
   RotateCcwIcon,
-  Settings2Icon
+  Settings2Icon,
+  SkipForwardIcon
 } from 'lucide-react'
-import { cn } from '@renderer/utils/cn'
 
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
 import { usePomodoroStore } from '@renderer/stores/use-pomodoro-store'
 
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import PomodoroDurationSelection from './pomodoro-duration-selection'
+import Button from '../ui/button'
 import PomodoroSoundSelection from './pomodoro-sound-selection'
+import PomodoroDurationSelection from './pomodoro-duration-selection'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card'
 
 function PomodoroTimer() {
   const [isDurationOpen, setIsDurationOpen] = useState(false)
@@ -29,6 +30,7 @@ function PomodoroTimer() {
   const pause = usePomodoroStore((s) => s.pause)
   const reset = usePomodoroStore((s) => s.reset)
   const stop = usePomodoroStore((s) => s.stop)
+  const skipRest = usePomodoroStore((s) => s.skipRest)
 
   const textRef = useRef<HTMLHeadingElement>(null)
 
@@ -101,73 +103,86 @@ function PomodoroTimer() {
           </CardTitle>
 
           <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => setIsSoundOpen(true)}
-              className="p-1.5 rounded-full bg-secondary hover:brightness-105 text-secondary-foreground active:brightness-95 transition-all cursor-pointer outline-none focus:outline-none flex items-center justify-center"
+            <Button
+              variant="secondary"
+              size="icon"
               aria-label="Pomodoro sound effects"
+              onClick={() => setIsSoundOpen(true)}
             >
               <EighthNoteIcon className="w-4 h-4" />
-            </button>
+            </Button>
 
-            <button
-              type="button"
-              onClick={() => setIsDurationOpen(true)}
-              className="p-1.5 rounded-full bg-secondary hover:brightness-105 text-secondary-foreground active:brightness-95 transition-all cursor-pointer outline-none focus:outline-none flex items-center justify-center"
+            <Button
+              variant="secondary"
+              size="icon"
               aria-label="Pomodoro duration settings"
+              onClick={() => setIsDurationOpen(true)}
             >
               <Settings2Icon className="w-4 h-4" />
-            </button>
+            </Button>
           </div>
         </CardHeader>
 
-        <CardContent>
-          <div className="grid grid-cols-2 gap-2">
-            <div className="bg-secondary rounded-xl flex items-center justify-center p-3 min-h-36 select-none">
-              <span className="text-5xl font-extrabold tracking-tight text-secondary-foreground tabular-nums">
-                {formattedTime}
-              </span>
-            </div>
+        <CardContent className="grid grid-cols-2 gap-2">
+          <div className="bg-secondary rounded-xl flex items-center justify-center p-3 min-h-36 select-none">
+            <span className="text-5xl font-extrabold tracking-tight text-secondary-foreground tabular-nums">
+              {formattedTime}
+            </span>
+          </div>
 
-            <div className="flex flex-col gap-2">
-              <button
-                type="button"
-                onClick={isRunning ? pause : start}
-                className={cn(
-                  'w-full flex-1 bg-secondary flex items-center justify-center text-secondary-foreground cursor-pointer transition-all duration-300 hover:brightness-95 active:scale-95 min-h-18 outline-none focus:outline-none',
-                  isRunning ? 'rounded-[100px]' : 'rounded-xl'
-                )}
-                aria-label={isRunning ? 'Pause timer' : 'Start timer'}
+          <div className="flex flex-col gap-2">
+            <Button
+              onClick={isRunning ? pause : start}
+              variant="secondary"
+              position={isRunning ? 'single-full' : 'single'}
+              className="w-full flex-1 grid place-items-center"
+              aria-label={isRunning ? 'Pause timer' : 'Start timer'}
+            >
+              {isRunning ? (
+                <PauseIcon className="w-9 h-9 fill-current stroke-none" />
+              ) : (
+                <PlayIcon className="w-9 h-9 fill-current stroke-none translate-x-0.5" />
+              )}
+            </Button>
+
+            <div className="grid grid-cols-2 gap-1 h-11.5">
+              <Button
+                variant="secondary"
+                position="first"
+                onClick={reset}
+                aria-label="Reset timer"
+                className="h-full w-full"
               >
-                {isRunning ? (
-                  <PauseIcon className="w-9 h-9 fill-current stroke-none" />
-                ) : (
-                  <PlayIcon className="w-9 h-9 fill-current stroke-none translate-x-0.5" />
-                )}
-              </button>
+                <RotateCcwIcon className="w-5 h-5 stroke-[2.5]" />
+              </Button>
 
-              <div className="grid grid-cols-2 gap-1 h-11.5">
-                <button
-                  type="button"
-                  onClick={reset}
-                  className="rounded-4xl rounded-tr-sm rounded-br-sm bg-secondary flex items-center justify-center text-secondary-foreground cursor-pointer transition-all hover:brightness-95 active:scale-95 outline-none focus:outline-none"
-                  aria-label="Reset timer"
-                >
-                  <RotateCcwIcon className="w-5 h-5 stroke-[2.5]" />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={stop}
-                  className="rounded-4xl rounded-tl-sm rounded-bl-sm bg-secondary flex items-center justify-center text-secondary-foreground cursor-pointer transition-all hover:brightness-95 active:scale-95 outline-none focus:outline-none"
-                  aria-label="Stop timer"
-                >
-                  <CircleStop className="w-5 h-5 stroke-[2.5]" />
-                </button>
-              </div>
+              <Button
+                variant="secondary"
+                position="last"
+                onClick={stop}
+                aria-label="Stop timer"
+                className="h-full w-full"
+              >
+                <CircleStop className="w-5 h-5 stroke-[2.5]" />
+              </Button>
             </div>
           </div>
         </CardContent>
+
+        <CardFooter className="flex items-center justify-end">
+          {mode === 'rest' && (
+            <Button
+              variant="accent"
+              onClick={skipRest}
+              position="single"
+              aria-label="Skip rest"
+              className="w-max"
+            >
+              Skip rest
+              <SkipForwardIcon className="w-4 h-4" />
+            </Button>
+          )}
+        </CardFooter>
       </Card>
 
       {isDurationOpen && (

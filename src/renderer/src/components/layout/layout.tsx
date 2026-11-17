@@ -1,7 +1,8 @@
 import { usePomodoroTicker } from '@renderer/stores/use-pomodoro-store'
-import AddTodoModal from '../shared/add-todo-modal'
+
 import Header from './header'
 import Navigation from './navigation'
+import AddTodoModal from '../todo/add-todo-modal'
 
 type Props = {
   children: React.ReactNode

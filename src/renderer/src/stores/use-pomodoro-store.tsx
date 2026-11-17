@@ -67,6 +67,7 @@ type PomodoroStore = {
   pause: () => void
   reset: () => void
   stop: () => void
+  skipRest: () => void
   setWorkDuration: (minutes: number) => void
   setRestDuration: (minutes: number) => void
   setWorkSound: (sound: SoundId) => void
@@ -128,6 +129,17 @@ export const usePomodoroStore = create<PomodoroStore>()(
             mode: 'work',
             status: 'idle',
             timeLeft: workDuration * 60
+          })
+        },
+
+        skipRest: () => {
+          const { mode, workDuration, status } = get()
+          if (mode !== 'rest') return
+          soundService.stopTimerEndSequence()
+          set({
+            mode: 'work',
+            timeLeft: workDuration * 60,
+            status: status === 'running' ? 'running' : 'idle'
           })
         },
 

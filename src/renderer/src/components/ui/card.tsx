@@ -1,12 +1,16 @@
-import { ComponentPropsWithRef, ReactNode } from 'react'
+import { ComponentPropsWithRef } from 'react'
 
-export function Card(props: { children: ReactNode }) {
-  const { children } = props
+export function Card(props: ComponentPropsWithRef<'section'>) {
+  const { children, ...rest } = props
 
-  return <section className="bg-card p-4 rounded-[20px] flex flex-col gap-4">{children}</section>
+  return (
+    <section {...rest} className="bg-card p-4 rounded-[20px] flex flex-col gap-4">
+      {children}
+    </section>
+  )
 }
 
-export function CardHeader(props: { children: ReactNode }) {
+export function CardHeader(props: ComponentPropsWithRef<'header'>) {
   const { children } = props
 
   return <header className="flex items-center gap-4 justify-between">{children}</header>
@@ -25,14 +29,14 @@ export function CardTitle(props: ComponentPropsWithRef<'h2'>) {
   )
 }
 
-export function CardContent(props: { children: ReactNode }) {
-  const { children } = props
+export function CardContent(props: ComponentPropsWithRef<'div'>) {
+  const { children, ...rest } = props
 
-  return <div>{children}</div>
+  return <div {...rest}>{children}</div>
 }
 
-export function CardFooter(props: { children: ReactNode }) {
-  const { children } = props
+export function CardFooter(props: ComponentPropsWithRef<'footer'>) {
+  const { children, ...rest } = props
 
-  return <footer>{children}</footer>
+  return <footer {...rest}>{children}</footer>
 }

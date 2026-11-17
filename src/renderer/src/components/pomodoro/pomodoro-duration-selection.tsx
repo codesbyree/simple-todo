@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { XIcon } from 'lucide-react'
+
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+
 import { REST_PRESETS, WORK_PRESETS, usePomodoroStore } from '@renderer/stores/use-pomodoro-store'
-import { cn } from '@renderer/utils/cn'
+
+import Button from '../ui/button'
 
 type PomodoroDurationSelectionProps = {
   handleOnClose: () => void
@@ -90,13 +93,9 @@ function PomodoroDurationSelection({ handleOnClose }: PomodoroDurationSelectionP
         <header className="flex justify-between items-center text-card-foreground">
           <h2 className="text-lg font-semibold tracking-tight">Duration Settings</h2>
 
-          <button
-            type="button"
-            onClick={animateAndClose}
-            className="cursor-pointer border-none focus:outline-0"
-          >
+          <Button onClick={animateAndClose} size="icon" variant="ghost">
             <XIcon className="w-6 h-6" />
-          </button>
+          </Button>
         </header>
 
         <div className="flex flex-col gap-4">
@@ -109,20 +108,16 @@ function PomodoroDurationSelection({ handleOnClose }: PomodoroDurationSelectionP
               <div className="flex gap-1">
                 {WORK_PRESETS.map((mins) => {
                   const isActive = selectedWork === mins
+
                   return (
-                    <button
+                    <Button
                       key={mins}
-                      type="button"
+                      position={isActive ? 'single-full' : 'single'}
                       onClick={() => setSelectedWork(mins)}
-                      className={cn(
-                        'py-2 px-1 rounded-xl text-sm font-medium italic tracking-tight cursor-pointer transition-all duration-300 ease-in-out select-none outline-none focus:outline-none grow transform-gpu',
-                        isActive
-                          ? 'bg-secondary text-secondary-foreground grow-2 rounded-[100px]'
-                          : 'bg-primary text-primary-foreground hover:brightness-95'
-                      )}
+                      variant={isActive ? 'secondary' : 'primary'}
                     >
                       {mins} Mins
-                    </button>
+                    </Button>
                   )
                 })}
               </div>
@@ -135,32 +130,21 @@ function PomodoroDurationSelection({ handleOnClose }: PomodoroDurationSelectionP
                 {REST_PRESETS.map((mins) => {
                   const isActive = selectedRest === mins
                   return (
-                    <button
+                    <Button
                       key={mins}
-                      type="button"
+                      position={isActive ? 'single-full' : 'single'}
                       onClick={() => setSelectedRest(mins)}
-                      className={cn(
-                        'py-2 px-1 rounded-xl text-sm font-medium italic tracking-tight cursor-pointer transition-all duration-300 ease-in-out select-none outline-none focus:outline-none grow transform-gpu',
-                        isActive
-                          ? 'bg-secondary text-secondary-foreground grow-2 rounded-[100px]'
-                          : 'bg-primary text-primary-foreground hover:brightness-95'
-                      )}
+                      variant={isActive ? 'secondary' : 'primary'}
                     >
                       {mins} Mins
-                    </button>
+                    </Button>
                   )
                 })}
               </div>
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={handleSaveAndReset}
-            className="disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer rounded-xl px-3 py-1 text-sm font-semibold tracking-tight text-primary-foreground bg-primary h-10 text-center w-full hover:brightness-105 transition-all"
-          >
-            Save and reset pomodoro
-          </button>
+          <Button onClick={handleSaveAndReset}>Save and reset pomodoro</Button>
         </div>
       </section>
     </div>
