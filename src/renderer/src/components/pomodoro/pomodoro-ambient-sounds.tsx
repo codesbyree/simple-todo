@@ -50,7 +50,7 @@ function PomodoroAmbientSounds() {
           <Button
             variant="secondary"
             size="icon-lg"
-            position="single-full"
+            position={isPlaying ? 'single-full' : 'middle'}
             onClick={togglePlay}
             aria-label={isPlaying ? 'Pause ambient music' : 'Play ambient music'}
           >
@@ -88,7 +88,7 @@ function PomodoroAmbientSounds() {
                 cardPos === 'single' && 'rounded-xl',
                 cardPos === 'top' && 'rounded-tl-xl rounded-tr-xl',
                 cardPos === 'bottom' && 'rounded-bl-xl rounded-br-xl',
-                isCurrent && 'border-white/60 brightness-120'
+                isCurrent && 'border-white/60 brightness-105'
               )}
             >
               <div className="flex flex-col gap-1.5 select-none">
@@ -108,8 +108,10 @@ function PomodoroAmbientSounds() {
                   playTrack(index)
                 }}
                 className={cn(
-                  'w-9 h-9 rounded-full bg-tertiary flex items-center justify-center text-tertiary-foreground transition-all hover:scale-105 active:scale-95 cursor-pointer outline-none border-none',
-                  isCurrentPlaying ? 'bg-primary text-primary-foreground' : 'hover:brightness-105'
+                  'w-9 h-9 rounded-xl bg-tertiary flex items-center justify-center text-tertiary-foreground transition-all hover:scale-105 active:scale-95 cursor-pointer outline-none border-none',
+                  isCurrentPlaying
+                    ? 'bg-primary text-primary-foreground rounded-4xl'
+                    : 'hover:brightness-105'
                 )}
                 aria-label={isCurrentPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
               >

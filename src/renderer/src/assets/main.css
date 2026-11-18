@@ -26,20 +26,10 @@
     0 1px 2px 0 rgba(0, 0, 0, 0.1), inset 0 1px 4px 0 rgba(255, 255, 255, 0.7),
     inset 0 -4px 5px 1px rgba(49, 205, 46, 1);
 
-  /* FAB */
-  --gradient-custom-radial: radial-gradient(
-    circle at bottom,
-    rgba(139, 222, 153, 0.6) 85%,
-    rgba(255, 255, 255, 1) 100%
-  );
-
-  --gradient-custom-radial-hover: radial-gradient(
-    circle at top,
-    rgba(139, 222, 153, 0.9) 90%,
-    rgba(255, 255, 255, 1) 100%
-  );
-
-  --shadow-fab-inner: inset 0 -4px 5px 1px rgba(255, 255, 255, 0.3);
+  /* --shadow-fab-inner: inset 0 -4px 5px 1px rgba(255, 255, 255, 0.3); */
+  --shadow-fab-inner:
+    0 1px 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -5px 5px 1px rgba(255, 255, 255, 0.3);
 }
 
 @utility trim-cap {

@@ -1,10 +1,15 @@
 import { useNavigationStore } from './stores/use-navigation-store'
+import { useStatisticsStore } from './stores/use-statistics-store'
+import { useTodoStore } from './stores/use-todo-store'
 
 import Layout from './components/layout/layout'
 import ActiveTodoSection from './components/todo/active-todo-section'
 import CompletedTodoSection from './components/todo/completed-todo-section'
 import PomodoroTimer from './components/pomodoro/pomodoro-timer'
 import PomodoroAmbientSounds from './components/pomodoro/pomodoro-ambient-sounds'
+import StatisticsWeekHeader from './components/statistics/statistics-week-header'
+import TasksCompletedCard from './components/statistics/tasks-completed-card'
+import FocusTimeCard from './components/statistics/focus-time-card'
 
 function TodoPage() {
   return (
@@ -25,9 +30,18 @@ function PomodoroPage() {
 }
 
 function AnalyticsPage() {
+  const selectedWeekOffset = useStatisticsStore((s) => s.selectedWeekOffset)
+  const getWeekSummary = useStatisticsStore((s) => s.getWeekSummary)
+  useStatisticsStore((s) => s.dailyMetrics)
+  useTodoStore((s) => s.todos)
+
+  const summary = getWeekSummary(selectedWeekOffset)
+
   return (
     <>
-      <p>Hello from Analytics</p>
+      <StatisticsWeekHeader rangeLabel={summary.rangeLabel} />
+      <TasksCompletedCard days={summary.days} />
+      <FocusTimeCard days={summary.days} />
     </>
   )
 }

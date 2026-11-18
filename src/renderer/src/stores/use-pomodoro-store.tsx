@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { soundService, SoundId } from '@renderer/services/sound-service'
+import { useStatisticsStore } from './use-statistics-store'
 
 export type PomodoroMode = 'work' | 'rest'
 export type PomodoroStatus = 'idle' | 'running' | 'paused' | 'transitioning'
@@ -173,11 +174,16 @@ export const usePomodoroStore = create<PomodoroStore>()(
 
           if (timeLeft > 1) {
             set({ timeLeft: timeLeft - 1 })
+            if (mode === 'work') {
+              useStatisticsStore.getState().recordFocusSeconds(1)
+            }
             return
           }
 
           // Timer reached 0!
           if (mode === 'work') {
+            useStatisticsStore.getState().recordFocusSeconds(1)
+
             // 1. Increment cycle count for completed work session
             set({
               timeLeft: 0,

@@ -1,7 +1,7 @@
 {
   "name": "simple-todo",
   "productName": "Simple Todo",
-  "version": "1.0.0",
+  "version": "17.11.2026",
   "description": "An Electron application with React and TypeScript",
   "main": "./out/main/index.js",
   "author": "example.com",

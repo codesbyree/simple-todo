@@ -17,8 +17,33 @@ function AddTodoModal() {
   }
 
   const handleOnOpen = () => {
+    useNavigationStore.getState().setActiveNavigation('todo')
     setIsModalVisible(true)
   }
+
+  useEffect(() => {
+    const handleKeyDown = (ev: KeyboardEvent) => {
+      const pressedKey = ev.key.toLowerCase()
+      const isCtrlorCmd = ev.ctrlKey || ev.metaKey
+
+      if (pressedKey === 'n' && isCtrlorCmd) {
+        ev.preventDefault()
+        handleOnOpen()
+      }
+    }
+
+    // Listen to IPC shortcut from Electron main process (Menu / before-input-event)
+    window.electron?.ipcRenderer?.on('shortcut:new-todo', () => {
+      handleOnOpen()
+    })
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.electron?.ipcRenderer?.removeAllListeners('shortcut:new-todo')
+    }
+  }, [])
 
   return (
     <>
@@ -42,44 +67,52 @@ function AddTodoButton({ handleOnOpen }: AddTodoButtonProps) {
     () => {
       if (!buttonRef.current) return
 
-      gsap.to(buttonRef.current, {
-        autoAlpha: isInTodoPage ? 1 : 0,
-        keyframes: { scale: isInTodoPage ? [0, 1.1, 1] : [1, 0] },
-        x: isInTodoPage ? 0 : -30,
-        filter: isInTodoPage ? 'blur(0px)' : 'blur(12px)',
-        ease: 'power3.out',
-        duration: 0.3
-      })
+      if (isInTodoPage) {
+        gsap.to(buttonRef.current, {
+          autoAlpha: 1,
+          keyframes: { scale: [0, 1] },
+          x: 0,
+          filter: 'blur(0px)',
+          ease: 'power3.out',
+          duration: 0.4,
+          onComplete: () => {
+            if (buttonRef.current) {
+              buttonRef.current.style.removeProperty('filter')
+            }
+          }
+        })
+      } else {
+        gsap.to(buttonRef.current, {
+          autoAlpha: 0,
+          scale: 0,
+          x: -60,
+          filter: 'blur(10px)',
+          duration: 0.3,
+          ease: 'power2.in'
+        })
+      }
     },
     {
       dependencies: [activePage]
     }
   )
 
-  useEffect(() => {
-    const openModalWhenShortcutPressed = (ev: KeyboardEvent) => {
-      const pressedKey = ev.key.toLowerCase()
-      const isCtrlorCmd = ev.ctrlKey || ev.metaKey
-
-      if (pressedKey === 'n' && isCtrlorCmd && activePage === 'todo') {
-        ev.preventDefault()
-        handleOnOpen()
-      }
-    }
-
-    window.addEventListener('keydown', openModalWhenShortcutPressed)
-
-    return () => window.removeEventListener('keydown', openModalWhenShortcutPressed)
-  }, [])
-
   return (
-    <Button
+    <button
       ref={buttonRef}
+      type="button"
       onClick={handleOnOpen}
-      className="w-13.5 h-13.5 transition-none cursor-pointer border border-white/30 outline-none rounded-full grid place-items-center bg-(image:--gradient-custom-radial) hover:bg-(image:--gradient-custom-radial-hover) text-nav-icon/70 fixed bottom-5 right-18 z-102 backdrop-blur-xl shadow-fab-inner opacity-0"
+      aria-label="Add todo"
+      style={{
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        background:
+          'radial-gradient(circle at 35% 25%, hsla(131 31% 73% / 0.45) 0%, hsla(131 31% 73% / 0.12) 55%, transparent 100%), var(--color-nav-background, hsla(131 31% 73% / 0.5))'
+      }}
+      className="fixed bottom-5 right-10 z-102 w-13.5 h-13.5 cursor-pointer border border-white/10 outline-none rounded-full grid place-items-center hover:brightness-105 active:scale-95 text-nav-icon/70 shadow-fab-inner"
     >
       <PlusIcon />
-    </Button>
+    </button>
   )
 }
 

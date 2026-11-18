@@ -1,5 +1,5 @@
 import { ReactNode, useRef } from 'react'
-import { ListCheckIcon, TimerIcon } from 'lucide-react'
+import { ListCheckIcon, TimerIcon, TrendingUpIcon } from 'lucide-react'
 
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
@@ -9,8 +9,8 @@ import { cn } from '@renderer/utils/cn'
 
 const NAV_ITEMS: { label: NavigationStore['activeNavigation']; icon: ReactNode }[] = [
   { label: 'todo', icon: <ListCheckIcon /> },
-  { label: 'pomodoro', icon: <TimerIcon /> }
-  // { label: 'statistics', icon: <TrendingUpIcon /> }
+  { label: 'pomodoro', icon: <TimerIcon /> },
+  { label: 'statistics', icon: <TrendingUpIcon /> }
 ]
 
 function Navigation() {
@@ -61,7 +61,7 @@ function Navigation() {
               }}
               onClick={() => setActiveNavigation(item.label)}
               className={cn(
-                'rounded-full py-2.5 px-5 flex items-center justify-center text-nav-icon/60 relative z-10 cursor-pointer transition-colors hover:bg-white/30',
+                'rounded-full active:scale-95 py-2.5 px-5 flex items-center justify-center text-nav-icon/60 relative z-10 cursor-pointer transition-colors hover:bg-white/20',
                 isActive && 'hover:bg-transparent text-nav-icon'
               )}
             >
